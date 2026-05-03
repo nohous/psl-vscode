@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "psl.injection.vhdl",
+  "injectionSelector": "L:source.vhdl",
+
+  "patterns": [
+    {
+      "name": "meta.embedded.psl.vhdl",
+      "comment": "Match a single line starting with '-- psl' and re-tokenize the rest of the line as PSL. The L: prefix in injectionSelector ensures our scopes win over the host comment scope.",
+      "begin": "(?i)(--)\\s*(psl)\\b\\s*",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.comment.vhdl" },
+        "2": { "name": "keyword.other.psl-marker.psl" }
+      },
+      "end": "(?=$)",
+      "patterns": [
+        { "include": "source.psl#strings" },
+        { "include": "source.psl#numbers" },
+        { "include": "source.psl#verification-units" },
+        { "include": "source.psl#verification-directives" },
+        { "include": "source.psl#property-decls" },
+        { "include": "source.psl#default-clock" },
+        { "include": "source.psl#temporal-fl" },
+        { "include": "source.psl#abort-ops" },
+        { "include": "source.psl#sere-brackets" },
+        { "include": "source.psl#sere-composition" },
+        { "include": "source.psl#implication-ops" },
+        { "include": "source.psl#logical-ops" },
+        { "include": "source.psl#types" },
+        { "include": "source.psl#other-keywords" },
+        { "include": "source.psl#identifiers" }
+      ]
+    }
+  ]
+}
